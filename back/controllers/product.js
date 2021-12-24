@@ -28,7 +28,7 @@ exports.getAllProducts = (req, res, next) => {
  *
  * Find Product:
  * 
- * Get Product
+ * Return Product or nul
  * 
  *
  */
