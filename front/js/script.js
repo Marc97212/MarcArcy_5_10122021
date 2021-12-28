@@ -1,15 +1,8 @@
+
 var searchParams = new URLSearchParams(window.location.search);
 const id = searchParams.get('id');
 
-fetch('http://localhost:3000/api/products/' + id)
-.then(response => response.json())
-.then(product => {
-    document.querySelector('#title').innerText = product.name
-    document.querySelector('#price').innerText = product.price
-    document.querySelector('#description').innerText = product.description
-    document.querySelector('.item__img img').setAttribute('src', product.imageUrl)
-})
-
+/* index */
 fetch('http://localhost:3000/api/products')
         .then(response => response.json())
         .then(products => {
@@ -27,3 +20,4 @@ fetch('http://localhost:3000/api/products')
                 document.querySelector('#items').appendChild(item);
             });
         })
+
