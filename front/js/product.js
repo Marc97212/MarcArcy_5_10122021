@@ -8,7 +8,16 @@ fetch('http://localhost:3000/api/products/' + id)
     document.querySelector('#price').innerText = product.price
     document.querySelector('#description').innerText = product.description
     document.querySelector('.item__img img').setAttribute('src', product.imageUrl)
-    document.querySelector('#colors').setAttribute('src',product.colors)
+    var selectColors = document.getElementById('colors')  
+    for (const element of product.colors) {
+        console.log(element);
+    var opt = document.createElement("option");
+    opt.setAttribute("value", element);
+    var itmText = document.createTextNode(element);
+    opt.appendChild(itmText);
+    selectColors.appendChild(opt);
+    }   
+   
 })
 
 const buttunAddToCart = document.querySelector("#addToCart")
@@ -25,8 +34,8 @@ function addToCart(){
     var price = document.querySelector('#price').innerText
     if (quantity > 0 && color !== "--SVP, choisissez une couleur --"){
         var item = newItem(title,price,color,quantity)
-        var cart = localStorage.getItem('cart');
-        console.log(cart)
+        addItem(item);
+        
     }
    
     console.log('teste',item)
@@ -38,17 +47,32 @@ function newItem(title,price,color,quantity){
         totalePrice:totalePrice,
         price:price,
         color:color,
-        quantity:quantity
+        quantity:parseInt(quantity),
+        image:document.querySelector('.item__img img').getAttribute('src')
     };
     return item;
 }
 function addItem(item){
     var cart = localStorage.getItem('cart');
-    if(cart == null){
-        cart = JSON.stringify([item]);
-        localStorage.setItem('cart',cart)
-        
+    if(cart !== null){     
+        cart = JSON.parse(cart);        
+        var temoin = false;
+        for (const key in cart){
+            if(item.title == cart[key].title && item.color == cart[key].color){
+                cart[key].quantity = cart[key].quantity + item.quantity;
+                cart[key].totalePrice = cart[key].totalePrice + item.totalePrice;
+                temoin = true;
+                break;
+            }
+        }
+        if (temoin == false){
+            cart.push(item);
+        }
+
     }else{
-        
-    }
+        cart = [item];
+    }    
+    console.log(cart)
+    // localStorage.removeItem('cart')
+    localStorage.setItem('cart',JSON.stringify(cart));    
 }
