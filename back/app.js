@@ -1,9 +1,7 @@
-
 const express = require('express');
 const path = require('path');
 
 const productRoutes = require('./routes/product');
-const navigationRoutes = require ('./routes/navigation'); 
 
 const app = express();
 
@@ -22,8 +20,4 @@ app.use(express.json());
 
 app.use('/api/products', productRoutes);
 
-app.use ('',navigationRoutes);
-
 module.exports = app;
-
-

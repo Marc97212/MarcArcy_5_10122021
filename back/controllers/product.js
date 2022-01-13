@@ -1,13 +1,6 @@
 const uuid = require('uuid/v1');
 const Product = require('../models/Product');
 
-/**
- *
- * Get all products:
- * 
- * Returne Products[]
- *  
- */
 exports.getAllProducts = (req, res, next) => {
   Product.find().then(
     (products) => {
@@ -24,14 +17,6 @@ exports.getAllProducts = (req, res, next) => {
   );
 };
 
-/**
- *
- * Find Product:
- * 
- * Return Product or nul
- * 
- *
- */
 exports.getOneProduct = (req, res, next) => {
   Product.findById(req.params.id).then(
     (product) => {

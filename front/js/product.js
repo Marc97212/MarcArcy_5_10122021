@@ -11,13 +11,13 @@ fetch('http://localhost:3000/api/products/' + id)
     var selectColors = document.getElementById('colors')  
     for (const element of product.colors) {
         console.log(element);
-    var opt = document.createElement("option");
-    opt.setAttribute("value", element);
-    var itmText = document.createTextNode(element);
-    opt.appendChild(itmText);
-    selectColors.appendChild(opt);
+        var opt = document.createElement("option");
+        opt.setAttribute("value", element);
+        var itmText = document.createTextNode(element);
+        opt.appendChild(itmText);
+        selectColors.appendChild(opt);
     }   
-   
+   document.querySelector('.item article').setAttribute('data-id', product._id)
 })
 
 const buttunAddToCart = document.querySelector("#addToCart")
@@ -27,22 +27,24 @@ buttunAddToCart.addEventListener("click",addToCart)
 function addToCart(){
     
     // localStorage.setItem('cart',teste)
+    var id = document.querySelector('.item article').getAttribute('data-id')
     var selectColor = document.getElementById('colors'); 
     var color = selectColor.options[selectColor.selectedIndex].text;
     var quantity = document.getElementById('quantity').value;
     var title = document.querySelector('#title').innerText;
     var price = document.querySelector('#price').innerText
     if (quantity > 0 && color !== "--SVP, choisissez une couleur --"){
-        var item = newItem(title,price,color,quantity)
+        var item = newItem(id,title,price,color,quantity)
         addItem(item);
         
     }
    
     console.log('teste',item)
 }
-function newItem(title,price,color,quantity){
+function newItem(id,title,price,color,quantity){
     var totalePrice = price * quantity;
     var item = {
+        id:id,
         title:title,
         totalePrice:totalePrice,
         price:price,
