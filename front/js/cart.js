@@ -1,4 +1,3 @@
-
 const template = document.querySelector('#item_template');
 var cart = localStorage.getItem('cart');
 cart = JSON.parse(cart);
@@ -38,7 +37,7 @@ var totaleQuantity = 0
     });
     document.querySelector('#totalQuantity').innerHTML = totaleQuantity;
     document.querySelector('#totalPrice').innerHTML = totaleCart;    
-document.querySelector('#totalPrice').innerHTML = totaleCart;
+    document.querySelector('#totalPrice').innerHTML = totaleCart;
     document.querySelector('#totalPrice').innerHTML = totaleCart;    
 }
 function updateProductCart(productId,quantity){    
@@ -84,11 +83,12 @@ cartForm.addEventListener('submit',function(event){
             },
             products: products 
         })
-    }).then(response => response.json())
+    }).then(response => response.json())    
     .then(data =>{
-        window.location.href = 'confirmation.html?orderId='+ data.orderId
-       
-    } )
+        window.location.href = 'confirmation.html?orderId='+data.orderId
+    })    
 })
+
+
 
 
