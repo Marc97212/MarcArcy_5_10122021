@@ -35,10 +35,8 @@ function addToCart(){
     var price = document.querySelector('#price').innerText
     if (quantity > 0 && color !== "--SVP, choisissez une couleur --"){
         var item = newItem(id,title,price,color,quantity)
-        addItem(item);
-        
+        addItem(item);        
     }
-   
     console.log('teste',item)
 }
 function newItem(id,title,price,color,quantity){

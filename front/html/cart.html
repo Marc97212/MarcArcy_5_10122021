@@ -28,12 +28,12 @@
       </div>
       <div class="limitedWidthBlockContainer menu">
         <div class="limitedWidthBlock">
-          <a href="./">
+          <a href="./index.html">
             <img class="logo" src="../images/logo.png" alt="Logo de l'entreprise">
           </a>
           <nav>
             <ul>
-              <a href="./"><li>Accueil</li></a>
+              <a href="./index.html"><li>Accueil</li></a>
               <a href="./cart"><li>Panier</li></a>
             </ul>
           </nav>
@@ -47,33 +47,33 @@
         <div class="cartAndFormContainer" id="cartAndFormContainer">
           <h1>Votre panier</h1>
           <section class="cart">
-            <section id="cart__items">
-              <template id="item_template">
+            <template id="item_template">
               <article class="cart__item" data-id="{product-ID}" data-color="{product-color}">
-                  <div class="cart__item__img">
-                    <img src="../images/product01.jpg" alt="Photographie d'un canapé">
+                <div class="cart__item__img">
+                  <img src="../images/product01.jpg" alt="Photographie d'un canapé">
+                </div>
+                <div class="cart__item__content">
+                  <div class="cart__item__content__description">
+                    <h2>Nom du produit</h2>
+                    <p class="color">Vert</p>
+                    <p class="price">42,00 €</p>
                   </div>
-                  <div class="cart__item__content">
-                    <div class="cart__item__content__description">
-                      <h2>Nom du produit</h2>
-                      <p class="color">Vert</p>
-                      <p class="price">42,00 €</p>
+                  <div class="cart__item__content__settings">
+                    <div class="cart__item__content__settings__quantity">
+                      <p class="quantity">Qté : </p>
+                      <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="42">
                     </div>
-                    <div class="cart__item__content__settings">
-                      <div class="cart__item__content__settings__quantity">
-                        <p class="quantity">Qté : </p>
-                        <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="42">
-                      </div>
-                      <div class="cart__item__content__settings__delete">
-                        <p class="deleteItem">Supprimer</p>
-                      </div>
+                    <div class="cart__item__content__settings__delete">
+                      <p class="deleteItem">Supprimer</p>
                     </div>
                   </div>
+                </div>
               </article>
             </template>
+            <section id="cart__items">
             </section>
             <div class="cart__price">
-              <p>Total (<span id="totalQuantity"><2></2></span> articles) : <span id="totalPrice"><84,00></span> €</p>
+              <p>Total (<span id="totalQuantity">2</span> articles) : <span id="totalPrice">84,00</span> €</p>
             </div>
             <div class="cart__order">
               <form method="get" class="cart__order__form">
