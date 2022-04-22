@@ -4,6 +4,10 @@ var cart = localStorage.getItem('cart');
 cart = JSON.parse(cart);
 console.log(cart)
 
+/**
+ * update cart 
+
+ */
 function updateCart(cart){
     const template = document.querySelector('#item_template');
     const cartItems = document.querySelector('#cart__items');
@@ -21,6 +25,7 @@ function updateCart(cart){
     cart.forEach(item => {
         const itemModel = document.importNode(template.content, true);
         itemModel.querySelector('.cart__item').setAttribute('data-id', item.id)
+        itemModel.querySelector('.cart__item').setAttribute('data-color', item.color)
         itemModel.querySelector('.color').innerText = item.color
         itemModel.querySelector('h2').innerText = item.title
         itemModel.querySelector('img').setAttribute('src', item.image)
@@ -33,7 +38,7 @@ function updateCart(cart){
         })
         let deleteInput = itemModel.querySelector('.deleteItem')
         deleteInput.addEventListener('click', function(){
-            deleteProductCart(item.id)
+            deleteProductCart(item.id,item.color)
         })
         quantityInput.setAttribute('value',item.quantity)
          
@@ -50,27 +55,56 @@ function updateCart(cart){
 
     localStorage.setItem('cart', JSON.stringify(cart));
 }
+
+/**
+ * Update product cart
+ * @param {*} productId 
+ * @param {*} quantity 
+ */
 function updateProductCart(productId,quantity){    
     const element = (product) => product.id == productId
     const index = cart.findIndex(element)
     cart[index].quantity = quantity
     document.querySelector('[data-id="'+productId+'"]').remove()
     updateCart(cart)
-    console.log(cart.find(product => product.id == productId))
+    
 }
 updateCart(cart)
 
-
-function deleteProductCart(productId){
-
+/**
+ * Delete cart visuel
+ * @param {*} productId 
+ * @param {*} color 
+ */
+function deleteProductCart(productId,color){
     document.querySelector('[data-id="'+productId+'"]').remove()
-    updateCart(cart.filter(element => element.id !== productId))
-    // console.log(cart.find(product => product.id == productId))
+    deleteItem(productId,color)
+    
+}
+
+/**
+ * Delete cart item
+ * @param {*} productId 
+ * @param {*} color 
+ */
+function deleteItem(productId,color){
+    if(cart !== null){            
+        for (const key in cart){
+            if(productId == cart[key].id && color == cart[key].color){
+              cart.splice(key,1)
+                break;
+            }
+        }
+        localStorage.setItem('cart',JSON.stringify(cart));
+        updateCart(cart)
+    } 
+        
 }
 
 
-
-//création numéro de commande
+/**
+ * Delevery form
+ */
 const cartForm = document.querySelector('.cart__order__form');
 cartForm.addEventListener('submit',function(event){
     event.preventDefault()
